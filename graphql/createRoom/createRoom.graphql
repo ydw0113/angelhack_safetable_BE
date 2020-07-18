@@ -1,0 +1,8 @@
+type Mutation {
+    createRoom(
+        name: String!
+        question: String!
+        answer: Int!
+        choices: [String]!
+    ): Room!
+}

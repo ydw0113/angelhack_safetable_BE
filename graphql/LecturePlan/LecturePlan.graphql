@@ -1,0 +1,5 @@
+type LecturePlan {
+    id: ID!
+    content: String!
+    author: User!
+}
