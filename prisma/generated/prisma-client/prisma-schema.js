@@ -3,7 +3,19 @@ module.exports = {
   // Please don't change this file manually but run `prisma generate` to update it.
   // For more information, please read the docs: https://www.prisma.io/docs/prisma-client/
 
-/* GraphQL */ `type AggregateRoom {
+/* GraphQL */ `type AggregateCoupon {
+  count: Int!
+}
+
+type AggregateLecturePlan {
+  count: Int!
+}
+
+type AggregateParticipant {
+  count: Int!
+}
+
+type AggregateRoom {
   count: Int!
 }
 
@@ -15,11 +27,383 @@ type BatchPayload {
   count: Long!
 }
 
+type Coupon {
+  id: ID!
+  data: String!
+  owner: User!
+}
+
+type CouponConnection {
+  pageInfo: PageInfo!
+  edges: [CouponEdge]!
+  aggregate: AggregateCoupon!
+}
+
+input CouponCreateInput {
+  id: ID
+  data: String!
+  owner: UserCreateOneWithoutCouponsInput!
+}
+
+input CouponCreateManyWithoutOwnerInput {
+  create: [CouponCreateWithoutOwnerInput!]
+  connect: [CouponWhereUniqueInput!]
+}
+
+input CouponCreateWithoutOwnerInput {
+  id: ID
+  data: String!
+}
+
+type CouponEdge {
+  node: Coupon!
+  cursor: String!
+}
+
+enum CouponOrderByInput {
+  id_ASC
+  id_DESC
+  data_ASC
+  data_DESC
+}
+
+type CouponPreviousValues {
+  id: ID!
+  data: String!
+}
+
+input CouponScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  data: String
+  data_not: String
+  data_in: [String!]
+  data_not_in: [String!]
+  data_lt: String
+  data_lte: String
+  data_gt: String
+  data_gte: String
+  data_contains: String
+  data_not_contains: String
+  data_starts_with: String
+  data_not_starts_with: String
+  data_ends_with: String
+  data_not_ends_with: String
+  AND: [CouponScalarWhereInput!]
+  OR: [CouponScalarWhereInput!]
+  NOT: [CouponScalarWhereInput!]
+}
+
+type CouponSubscriptionPayload {
+  mutation: MutationType!
+  node: Coupon
+  updatedFields: [String!]
+  previousValues: CouponPreviousValues
+}
+
+input CouponSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: CouponWhereInput
+  AND: [CouponSubscriptionWhereInput!]
+}
+
+input CouponUpdateInput {
+  data: String
+  owner: UserUpdateOneRequiredWithoutCouponsInput
+}
+
+input CouponUpdateManyDataInput {
+  data: String
+}
+
+input CouponUpdateManyMutationInput {
+  data: String
+}
+
+input CouponUpdateManyWithoutOwnerInput {
+  create: [CouponCreateWithoutOwnerInput!]
+  delete: [CouponWhereUniqueInput!]
+  connect: [CouponWhereUniqueInput!]
+  set: [CouponWhereUniqueInput!]
+  disconnect: [CouponWhereUniqueInput!]
+  update: [CouponUpdateWithWhereUniqueWithoutOwnerInput!]
+  upsert: [CouponUpsertWithWhereUniqueWithoutOwnerInput!]
+  deleteMany: [CouponScalarWhereInput!]
+  updateMany: [CouponUpdateManyWithWhereNestedInput!]
+}
+
+input CouponUpdateManyWithWhereNestedInput {
+  where: CouponScalarWhereInput!
+  data: CouponUpdateManyDataInput!
+}
+
+input CouponUpdateWithoutOwnerDataInput {
+  data: String
+}
+
+input CouponUpdateWithWhereUniqueWithoutOwnerInput {
+  where: CouponWhereUniqueInput!
+  data: CouponUpdateWithoutOwnerDataInput!
+}
+
+input CouponUpsertWithWhereUniqueWithoutOwnerInput {
+  where: CouponWhereUniqueInput!
+  update: CouponUpdateWithoutOwnerDataInput!
+  create: CouponCreateWithoutOwnerInput!
+}
+
+input CouponWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  data: String
+  data_not: String
+  data_in: [String!]
+  data_not_in: [String!]
+  data_lt: String
+  data_lte: String
+  data_gt: String
+  data_gte: String
+  data_contains: String
+  data_not_contains: String
+  data_starts_with: String
+  data_not_starts_with: String
+  data_ends_with: String
+  data_not_ends_with: String
+  owner: UserWhereInput
+  AND: [CouponWhereInput!]
+}
+
+input CouponWhereUniqueInput {
+  id: ID
+}
+
 scalar DateTime
+
+type LecturePlan {
+  id: ID!
+  content: String!
+  author: User!
+}
+
+type LecturePlanConnection {
+  pageInfo: PageInfo!
+  edges: [LecturePlanEdge]!
+  aggregate: AggregateLecturePlan!
+}
+
+input LecturePlanCreateInput {
+  id: ID
+  content: String!
+  author: UserCreateOneWithoutLecturePlansInput!
+}
+
+input LecturePlanCreateManyWithoutAuthorInput {
+  create: [LecturePlanCreateWithoutAuthorInput!]
+  connect: [LecturePlanWhereUniqueInput!]
+}
+
+input LecturePlanCreateWithoutAuthorInput {
+  id: ID
+  content: String!
+}
+
+type LecturePlanEdge {
+  node: LecturePlan!
+  cursor: String!
+}
+
+enum LecturePlanOrderByInput {
+  id_ASC
+  id_DESC
+  content_ASC
+  content_DESC
+}
+
+type LecturePlanPreviousValues {
+  id: ID!
+  content: String!
+}
+
+input LecturePlanScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  content: String
+  content_not: String
+  content_in: [String!]
+  content_not_in: [String!]
+  content_lt: String
+  content_lte: String
+  content_gt: String
+  content_gte: String
+  content_contains: String
+  content_not_contains: String
+  content_starts_with: String
+  content_not_starts_with: String
+  content_ends_with: String
+  content_not_ends_with: String
+  AND: [LecturePlanScalarWhereInput!]
+  OR: [LecturePlanScalarWhereInput!]
+  NOT: [LecturePlanScalarWhereInput!]
+}
+
+type LecturePlanSubscriptionPayload {
+  mutation: MutationType!
+  node: LecturePlan
+  updatedFields: [String!]
+  previousValues: LecturePlanPreviousValues
+}
+
+input LecturePlanSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: LecturePlanWhereInput
+  AND: [LecturePlanSubscriptionWhereInput!]
+}
+
+input LecturePlanUpdateInput {
+  content: String
+  author: UserUpdateOneRequiredWithoutLecturePlansInput
+}
+
+input LecturePlanUpdateManyDataInput {
+  content: String
+}
+
+input LecturePlanUpdateManyMutationInput {
+  content: String
+}
+
+input LecturePlanUpdateManyWithoutAuthorInput {
+  create: [LecturePlanCreateWithoutAuthorInput!]
+  delete: [LecturePlanWhereUniqueInput!]
+  connect: [LecturePlanWhereUniqueInput!]
+  set: [LecturePlanWhereUniqueInput!]
+  disconnect: [LecturePlanWhereUniqueInput!]
+  update: [LecturePlanUpdateWithWhereUniqueWithoutAuthorInput!]
+  upsert: [LecturePlanUpsertWithWhereUniqueWithoutAuthorInput!]
+  deleteMany: [LecturePlanScalarWhereInput!]
+  updateMany: [LecturePlanUpdateManyWithWhereNestedInput!]
+}
+
+input LecturePlanUpdateManyWithWhereNestedInput {
+  where: LecturePlanScalarWhereInput!
+  data: LecturePlanUpdateManyDataInput!
+}
+
+input LecturePlanUpdateWithoutAuthorDataInput {
+  content: String
+}
+
+input LecturePlanUpdateWithWhereUniqueWithoutAuthorInput {
+  where: LecturePlanWhereUniqueInput!
+  data: LecturePlanUpdateWithoutAuthorDataInput!
+}
+
+input LecturePlanUpsertWithWhereUniqueWithoutAuthorInput {
+  where: LecturePlanWhereUniqueInput!
+  update: LecturePlanUpdateWithoutAuthorDataInput!
+  create: LecturePlanCreateWithoutAuthorInput!
+}
+
+input LecturePlanWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  content: String
+  content_not: String
+  content_in: [String!]
+  content_not_in: [String!]
+  content_lt: String
+  content_lte: String
+  content_gt: String
+  content_gte: String
+  content_contains: String
+  content_not_contains: String
+  content_starts_with: String
+  content_not_starts_with: String
+  content_ends_with: String
+  content_not_ends_with: String
+  author: UserWhereInput
+  AND: [LecturePlanWhereInput!]
+}
+
+input LecturePlanWhereUniqueInput {
+  id: ID
+}
 
 scalar Long
 
 type Mutation {
+  createCoupon(data: CouponCreateInput!): Coupon!
+  updateCoupon(data: CouponUpdateInput!, where: CouponWhereUniqueInput!): Coupon
+  updateManyCoupons(data: CouponUpdateManyMutationInput!, where: CouponWhereInput): BatchPayload!
+  upsertCoupon(where: CouponWhereUniqueInput!, create: CouponCreateInput!, update: CouponUpdateInput!): Coupon!
+  deleteCoupon(where: CouponWhereUniqueInput!): Coupon
+  deleteManyCoupons(where: CouponWhereInput): BatchPayload!
+  createLecturePlan(data: LecturePlanCreateInput!): LecturePlan!
+  updateLecturePlan(data: LecturePlanUpdateInput!, where: LecturePlanWhereUniqueInput!): LecturePlan
+  updateManyLecturePlans(data: LecturePlanUpdateManyMutationInput!, where: LecturePlanWhereInput): BatchPayload!
+  upsertLecturePlan(where: LecturePlanWhereUniqueInput!, create: LecturePlanCreateInput!, update: LecturePlanUpdateInput!): LecturePlan!
+  deleteLecturePlan(where: LecturePlanWhereUniqueInput!): LecturePlan
+  deleteManyLecturePlans(where: LecturePlanWhereInput): BatchPayload!
+  createParticipant(data: ParticipantCreateInput!): Participant!
+  updateParticipant(data: ParticipantUpdateInput!, where: ParticipantWhereUniqueInput!): Participant
+  updateManyParticipants(data: ParticipantUpdateManyMutationInput!, where: ParticipantWhereInput): BatchPayload!
+  upsertParticipant(where: ParticipantWhereUniqueInput!, create: ParticipantCreateInput!, update: ParticipantUpdateInput!): Participant!
+  deleteParticipant(where: ParticipantWhereUniqueInput!): Participant
+  deleteManyParticipants(where: ParticipantWhereInput): BatchPayload!
   createRoom(data: RoomCreateInput!): Room!
   updateRoom(data: RoomUpdateInput!, where: RoomWhereUniqueInput!): Room
   updateManyRooms(data: RoomUpdateManyMutationInput!, where: RoomWhereInput): BatchPayload!
@@ -51,7 +435,193 @@ type PageInfo {
   endCursor: String
 }
 
+type Participant {
+  id: ID!
+  phone: String!
+  room: Room!
+}
+
+type ParticipantConnection {
+  pageInfo: PageInfo!
+  edges: [ParticipantEdge]!
+  aggregate: AggregateParticipant!
+}
+
+input ParticipantCreateInput {
+  id: ID
+  phone: String!
+  room: RoomCreateOneWithoutParticipantsInput!
+}
+
+input ParticipantCreateManyWithoutRoomInput {
+  create: [ParticipantCreateWithoutRoomInput!]
+  connect: [ParticipantWhereUniqueInput!]
+}
+
+input ParticipantCreateWithoutRoomInput {
+  id: ID
+  phone: String!
+}
+
+type ParticipantEdge {
+  node: Participant!
+  cursor: String!
+}
+
+enum ParticipantOrderByInput {
+  id_ASC
+  id_DESC
+  phone_ASC
+  phone_DESC
+}
+
+type ParticipantPreviousValues {
+  id: ID!
+  phone: String!
+}
+
+input ParticipantScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  phone: String
+  phone_not: String
+  phone_in: [String!]
+  phone_not_in: [String!]
+  phone_lt: String
+  phone_lte: String
+  phone_gt: String
+  phone_gte: String
+  phone_contains: String
+  phone_not_contains: String
+  phone_starts_with: String
+  phone_not_starts_with: String
+  phone_ends_with: String
+  phone_not_ends_with: String
+  AND: [ParticipantScalarWhereInput!]
+  OR: [ParticipantScalarWhereInput!]
+  NOT: [ParticipantScalarWhereInput!]
+}
+
+type ParticipantSubscriptionPayload {
+  mutation: MutationType!
+  node: Participant
+  updatedFields: [String!]
+  previousValues: ParticipantPreviousValues
+}
+
+input ParticipantSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: ParticipantWhereInput
+  AND: [ParticipantSubscriptionWhereInput!]
+}
+
+input ParticipantUpdateInput {
+  phone: String
+  room: RoomUpdateOneRequiredWithoutParticipantsInput
+}
+
+input ParticipantUpdateManyDataInput {
+  phone: String
+}
+
+input ParticipantUpdateManyMutationInput {
+  phone: String
+}
+
+input ParticipantUpdateManyWithoutRoomInput {
+  create: [ParticipantCreateWithoutRoomInput!]
+  delete: [ParticipantWhereUniqueInput!]
+  connect: [ParticipantWhereUniqueInput!]
+  set: [ParticipantWhereUniqueInput!]
+  disconnect: [ParticipantWhereUniqueInput!]
+  update: [ParticipantUpdateWithWhereUniqueWithoutRoomInput!]
+  upsert: [ParticipantUpsertWithWhereUniqueWithoutRoomInput!]
+  deleteMany: [ParticipantScalarWhereInput!]
+  updateMany: [ParticipantUpdateManyWithWhereNestedInput!]
+}
+
+input ParticipantUpdateManyWithWhereNestedInput {
+  where: ParticipantScalarWhereInput!
+  data: ParticipantUpdateManyDataInput!
+}
+
+input ParticipantUpdateWithoutRoomDataInput {
+  phone: String
+}
+
+input ParticipantUpdateWithWhereUniqueWithoutRoomInput {
+  where: ParticipantWhereUniqueInput!
+  data: ParticipantUpdateWithoutRoomDataInput!
+}
+
+input ParticipantUpsertWithWhereUniqueWithoutRoomInput {
+  where: ParticipantWhereUniqueInput!
+  update: ParticipantUpdateWithoutRoomDataInput!
+  create: ParticipantCreateWithoutRoomInput!
+}
+
+input ParticipantWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  phone: String
+  phone_not: String
+  phone_in: [String!]
+  phone_not_in: [String!]
+  phone_lt: String
+  phone_lte: String
+  phone_gt: String
+  phone_gte: String
+  phone_contains: String
+  phone_not_contains: String
+  phone_starts_with: String
+  phone_not_starts_with: String
+  phone_ends_with: String
+  phone_not_ends_with: String
+  room: RoomWhereInput
+  AND: [ParticipantWhereInput!]
+}
+
+input ParticipantWhereUniqueInput {
+  id: ID
+}
+
 type Query {
+  coupon(where: CouponWhereUniqueInput!): Coupon
+  coupons(where: CouponWhereInput, orderBy: CouponOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Coupon]!
+  couponsConnection(where: CouponWhereInput, orderBy: CouponOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CouponConnection!
+  lecturePlan(where: LecturePlanWhereUniqueInput!): LecturePlan
+  lecturePlans(where: LecturePlanWhereInput, orderBy: LecturePlanOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [LecturePlan]!
+  lecturePlansConnection(where: LecturePlanWhereInput, orderBy: LecturePlanOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LecturePlanConnection!
+  participant(where: ParticipantWhereUniqueInput!): Participant
+  participants(where: ParticipantWhereInput, orderBy: ParticipantOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Participant]!
+  participantsConnection(where: ParticipantWhereInput, orderBy: ParticipantOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ParticipantConnection!
   room(where: RoomWhereUniqueInput!): Room
   rooms(where: RoomWhereInput, orderBy: RoomOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Room]!
   roomsConnection(where: RoomWhereInput, orderBy: RoomOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): RoomConnection!
@@ -66,7 +636,11 @@ type Room {
   name: String!
   owner: User!
   question: String!
-  answer: String!
+  choices: [String!]!
+  answer: Int!
+  isActive: Boolean!
+  participants(where: ParticipantWhereInput, orderBy: ParticipantOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Participant!]
+  winnerPhoneNumber: String
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -77,12 +651,20 @@ type RoomConnection {
   aggregate: AggregateRoom!
 }
 
+input RoomCreatechoicesInput {
+  set: [String!]
+}
+
 input RoomCreateInput {
   id: ID
   name: String!
   owner: UserCreateOneWithoutRoomsInput!
   question: String!
-  answer: String!
+  choices: RoomCreatechoicesInput
+  answer: Int!
+  isActive: Boolean!
+  participants: ParticipantCreateManyWithoutRoomInput
+  winnerPhoneNumber: String
 }
 
 input RoomCreateManyWithoutOwnerInput {
@@ -90,11 +672,31 @@ input RoomCreateManyWithoutOwnerInput {
   connect: [RoomWhereUniqueInput!]
 }
 
+input RoomCreateOneWithoutParticipantsInput {
+  create: RoomCreateWithoutParticipantsInput
+  connect: RoomWhereUniqueInput
+}
+
 input RoomCreateWithoutOwnerInput {
   id: ID
   name: String!
   question: String!
-  answer: String!
+  choices: RoomCreatechoicesInput
+  answer: Int!
+  isActive: Boolean!
+  participants: ParticipantCreateManyWithoutRoomInput
+  winnerPhoneNumber: String
+}
+
+input RoomCreateWithoutParticipantsInput {
+  id: ID
+  name: String!
+  owner: UserCreateOneWithoutRoomsInput!
+  question: String!
+  choices: RoomCreatechoicesInput
+  answer: Int!
+  isActive: Boolean!
+  winnerPhoneNumber: String
 }
 
 type RoomEdge {
@@ -111,6 +713,10 @@ enum RoomOrderByInput {
   question_DESC
   answer_ASC
   answer_DESC
+  isActive_ASC
+  isActive_DESC
+  winnerPhoneNumber_ASC
+  winnerPhoneNumber_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -121,7 +727,10 @@ type RoomPreviousValues {
   id: ID!
   name: String!
   question: String!
-  answer: String!
+  choices: [String!]!
+  answer: Int!
+  isActive: Boolean!
+  winnerPhoneNumber: String
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -169,20 +778,30 @@ input RoomScalarWhereInput {
   question_not_starts_with: String
   question_ends_with: String
   question_not_ends_with: String
-  answer: String
-  answer_not: String
-  answer_in: [String!]
-  answer_not_in: [String!]
-  answer_lt: String
-  answer_lte: String
-  answer_gt: String
-  answer_gte: String
-  answer_contains: String
-  answer_not_contains: String
-  answer_starts_with: String
-  answer_not_starts_with: String
-  answer_ends_with: String
-  answer_not_ends_with: String
+  answer: Int
+  answer_not: Int
+  answer_in: [Int!]
+  answer_not_in: [Int!]
+  answer_lt: Int
+  answer_lte: Int
+  answer_gt: Int
+  answer_gte: Int
+  isActive: Boolean
+  isActive_not: Boolean
+  winnerPhoneNumber: String
+  winnerPhoneNumber_not: String
+  winnerPhoneNumber_in: [String!]
+  winnerPhoneNumber_not_in: [String!]
+  winnerPhoneNumber_lt: String
+  winnerPhoneNumber_lte: String
+  winnerPhoneNumber_gt: String
+  winnerPhoneNumber_gte: String
+  winnerPhoneNumber_contains: String
+  winnerPhoneNumber_not_contains: String
+  winnerPhoneNumber_starts_with: String
+  winnerPhoneNumber_not_starts_with: String
+  winnerPhoneNumber_ends_with: String
+  winnerPhoneNumber_not_ends_with: String
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]
@@ -220,23 +839,37 @@ input RoomSubscriptionWhereInput {
   AND: [RoomSubscriptionWhereInput!]
 }
 
+input RoomUpdatechoicesInput {
+  set: [String!]
+}
+
 input RoomUpdateInput {
   name: String
   owner: UserUpdateOneRequiredWithoutRoomsInput
   question: String
-  answer: String
+  choices: RoomUpdatechoicesInput
+  answer: Int
+  isActive: Boolean
+  participants: ParticipantUpdateManyWithoutRoomInput
+  winnerPhoneNumber: String
 }
 
 input RoomUpdateManyDataInput {
   name: String
   question: String
-  answer: String
+  choices: RoomUpdatechoicesInput
+  answer: Int
+  isActive: Boolean
+  winnerPhoneNumber: String
 }
 
 input RoomUpdateManyMutationInput {
   name: String
   question: String
-  answer: String
+  choices: RoomUpdatechoicesInput
+  answer: Int
+  isActive: Boolean
+  winnerPhoneNumber: String
 }
 
 input RoomUpdateManyWithoutOwnerInput {
@@ -256,15 +889,41 @@ input RoomUpdateManyWithWhereNestedInput {
   data: RoomUpdateManyDataInput!
 }
 
+input RoomUpdateOneRequiredWithoutParticipantsInput {
+  create: RoomCreateWithoutParticipantsInput
+  update: RoomUpdateWithoutParticipantsDataInput
+  upsert: RoomUpsertWithoutParticipantsInput
+  connect: RoomWhereUniqueInput
+}
+
 input RoomUpdateWithoutOwnerDataInput {
   name: String
   question: String
-  answer: String
+  choices: RoomUpdatechoicesInput
+  answer: Int
+  isActive: Boolean
+  participants: ParticipantUpdateManyWithoutRoomInput
+  winnerPhoneNumber: String
+}
+
+input RoomUpdateWithoutParticipantsDataInput {
+  name: String
+  owner: UserUpdateOneRequiredWithoutRoomsInput
+  question: String
+  choices: RoomUpdatechoicesInput
+  answer: Int
+  isActive: Boolean
+  winnerPhoneNumber: String
 }
 
 input RoomUpdateWithWhereUniqueWithoutOwnerInput {
   where: RoomWhereUniqueInput!
   data: RoomUpdateWithoutOwnerDataInput!
+}
+
+input RoomUpsertWithoutParticipantsInput {
+  update: RoomUpdateWithoutParticipantsDataInput!
+  create: RoomCreateWithoutParticipantsInput!
 }
 
 input RoomUpsertWithWhereUniqueWithoutOwnerInput {
@@ -317,20 +976,31 @@ input RoomWhereInput {
   question_not_starts_with: String
   question_ends_with: String
   question_not_ends_with: String
-  answer: String
-  answer_not: String
-  answer_in: [String!]
-  answer_not_in: [String!]
-  answer_lt: String
-  answer_lte: String
-  answer_gt: String
-  answer_gte: String
-  answer_contains: String
-  answer_not_contains: String
-  answer_starts_with: String
-  answer_not_starts_with: String
-  answer_ends_with: String
-  answer_not_ends_with: String
+  answer: Int
+  answer_not: Int
+  answer_in: [Int!]
+  answer_not_in: [Int!]
+  answer_lt: Int
+  answer_lte: Int
+  answer_gt: Int
+  answer_gte: Int
+  isActive: Boolean
+  isActive_not: Boolean
+  participants_some: ParticipantWhereInput
+  winnerPhoneNumber: String
+  winnerPhoneNumber_not: String
+  winnerPhoneNumber_in: [String!]
+  winnerPhoneNumber_not_in: [String!]
+  winnerPhoneNumber_lt: String
+  winnerPhoneNumber_lte: String
+  winnerPhoneNumber_gt: String
+  winnerPhoneNumber_gte: String
+  winnerPhoneNumber_contains: String
+  winnerPhoneNumber_not_contains: String
+  winnerPhoneNumber_starts_with: String
+  winnerPhoneNumber_not_starts_with: String
+  winnerPhoneNumber_ends_with: String
+  winnerPhoneNumber_not_ends_with: String
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]
@@ -356,6 +1026,9 @@ input RoomWhereUniqueInput {
 }
 
 type Subscription {
+  coupon(where: CouponSubscriptionWhereInput): CouponSubscriptionPayload
+  lecturePlan(where: LecturePlanSubscriptionWhereInput): LecturePlanSubscriptionPayload
+  participant(where: ParticipantSubscriptionWhereInput): ParticipantSubscriptionPayload
   room(where: RoomSubscriptionWhereInput): RoomSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
 }
@@ -366,6 +1039,8 @@ type User {
   email: String!
   password: String!
   rooms(where: RoomWhereInput, orderBy: RoomOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Room!]
+  coupons(where: CouponWhereInput, orderBy: CouponOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Coupon!]
+  lecturePlans(where: LecturePlanWhereInput, orderBy: LecturePlanOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [LecturePlan!]
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -382,6 +1057,18 @@ input UserCreateInput {
   email: String!
   password: String!
   rooms: RoomCreateManyWithoutOwnerInput
+  coupons: CouponCreateManyWithoutOwnerInput
+  lecturePlans: LecturePlanCreateManyWithoutAuthorInput
+}
+
+input UserCreateOneWithoutCouponsInput {
+  create: UserCreateWithoutCouponsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateOneWithoutLecturePlansInput {
+  create: UserCreateWithoutLecturePlansInput
+  connect: UserWhereUniqueInput
 }
 
 input UserCreateOneWithoutRoomsInput {
@@ -389,11 +1076,31 @@ input UserCreateOneWithoutRoomsInput {
   connect: UserWhereUniqueInput
 }
 
+input UserCreateWithoutCouponsInput {
+  id: ID
+  username: String!
+  email: String!
+  password: String!
+  rooms: RoomCreateManyWithoutOwnerInput
+  lecturePlans: LecturePlanCreateManyWithoutAuthorInput
+}
+
+input UserCreateWithoutLecturePlansInput {
+  id: ID
+  username: String!
+  email: String!
+  password: String!
+  rooms: RoomCreateManyWithoutOwnerInput
+  coupons: CouponCreateManyWithoutOwnerInput
+}
+
 input UserCreateWithoutRoomsInput {
   id: ID
   username: String!
   email: String!
   password: String!
+  coupons: CouponCreateManyWithoutOwnerInput
+  lecturePlans: LecturePlanCreateManyWithoutAuthorInput
 }
 
 type UserEdge {
@@ -446,12 +1153,28 @@ input UserUpdateInput {
   email: String
   password: String
   rooms: RoomUpdateManyWithoutOwnerInput
+  coupons: CouponUpdateManyWithoutOwnerInput
+  lecturePlans: LecturePlanUpdateManyWithoutAuthorInput
 }
 
 input UserUpdateManyMutationInput {
   username: String
   email: String
   password: String
+}
+
+input UserUpdateOneRequiredWithoutCouponsInput {
+  create: UserCreateWithoutCouponsInput
+  update: UserUpdateWithoutCouponsDataInput
+  upsert: UserUpsertWithoutCouponsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserUpdateOneRequiredWithoutLecturePlansInput {
+  create: UserCreateWithoutLecturePlansInput
+  update: UserUpdateWithoutLecturePlansDataInput
+  upsert: UserUpsertWithoutLecturePlansInput
+  connect: UserWhereUniqueInput
 }
 
 input UserUpdateOneRequiredWithoutRoomsInput {
@@ -461,10 +1184,38 @@ input UserUpdateOneRequiredWithoutRoomsInput {
   connect: UserWhereUniqueInput
 }
 
+input UserUpdateWithoutCouponsDataInput {
+  username: String
+  email: String
+  password: String
+  rooms: RoomUpdateManyWithoutOwnerInput
+  lecturePlans: LecturePlanUpdateManyWithoutAuthorInput
+}
+
+input UserUpdateWithoutLecturePlansDataInput {
+  username: String
+  email: String
+  password: String
+  rooms: RoomUpdateManyWithoutOwnerInput
+  coupons: CouponUpdateManyWithoutOwnerInput
+}
+
 input UserUpdateWithoutRoomsDataInput {
   username: String
   email: String
   password: String
+  coupons: CouponUpdateManyWithoutOwnerInput
+  lecturePlans: LecturePlanUpdateManyWithoutAuthorInput
+}
+
+input UserUpsertWithoutCouponsInput {
+  update: UserUpdateWithoutCouponsDataInput!
+  create: UserCreateWithoutCouponsInput!
+}
+
+input UserUpsertWithoutLecturePlansInput {
+  update: UserUpdateWithoutLecturePlansDataInput!
+  create: UserCreateWithoutLecturePlansInput!
 }
 
 input UserUpsertWithoutRoomsInput {
@@ -530,6 +1281,8 @@ input UserWhereInput {
   password_ends_with: String
   password_not_ends_with: String
   rooms_some: RoomWhereInput
+  coupons_some: CouponWhereInput
+  lecturePlans_some: LecturePlanWhereInput
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]

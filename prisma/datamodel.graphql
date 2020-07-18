@@ -1,0 +1,43 @@
+type User {
+    id: ID! @id
+    username: String!
+    email: String! @unique
+    password: String!
+    rooms: [Room]
+    coupons: [Coupon]
+    lecturePlans: [LecturePlan]
+
+    createdAt: DateTime! @createdAt
+    updatedAt: DateTime! @updatedAt
+}
+type Room {
+    id: ID! @id
+    name: String! @unique
+    owner: User! @relation(link: INLINE)
+    question: String!
+    choices: [String]!
+    answer: Int!
+    isActive: Boolean!
+    participants: [Participant]
+    winnerPhoneNumber: String
+
+    createdAt: DateTime! @createdAt
+    updatedAt: DateTime! @updatedAt
+}
+
+type Coupon {
+    id: ID! @id
+    data: String!
+    owner: User! @relation(link: INLINE)
+}
+type LecturePlan {
+    id: ID! @id
+    content: String!
+    author: User! @relation(link: INLINE)
+}
+
+type Participant {
+    id: ID! @id
+    phone: String!
+    room: Room! @relation(link: INLINE)
+}

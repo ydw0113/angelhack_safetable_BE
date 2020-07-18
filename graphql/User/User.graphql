@@ -1,0 +1,14 @@
+type User {
+    id: String!
+
+    username: String!
+    email: String!
+    password: String!
+
+    rooms: [Room]
+    coupons: [Coupon]
+    lecturePlans: [LecturePlan]
+
+    createdAt: String!
+    updatedAt: String!
+}

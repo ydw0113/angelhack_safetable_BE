@@ -1,0 +1,5 @@
+type Coupon {
+    id: ID!
+    data: String!
+    owner: User!
+}

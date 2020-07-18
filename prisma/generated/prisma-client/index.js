@@ -11,6 +11,18 @@ var models = [
   {
     name: "Room",
     embedded: false
+  },
+  {
+    name: "Coupon",
+    embedded: false
+  },
+  {
+    name: "LecturePlan",
+    embedded: false
+  },
+  {
+    name: "Participant",
+    embedded: false
   }
 ];
 exports.Prisma = prisma_lib_1.makePrismaClientClass({

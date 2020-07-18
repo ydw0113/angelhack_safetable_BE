@@ -1,0 +1,3 @@
+type Query {
+    getRoomByName(name: String!): Room
+}

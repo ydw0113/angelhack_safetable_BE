@@ -1,0 +1,15 @@
+type Room {
+    id: String!
+
+    name: String!
+    owner: User!
+    question: String!
+    choices: [String]!
+    answer: Int!
+    isActive: Boolean!
+    participants: [Participant]
+    winnerPhoneNumber: String
+
+    createdAt: String!
+    updatedAt: String!
+}
